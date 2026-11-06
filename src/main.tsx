@@ -25,7 +25,7 @@ function App(){
   <header className="header"><div className="wrap nav">
     <a className="logo" href="#inicio" aria-label="CosmoTech Solutions - início"><span className="logo-symbol">C<span>•</span></span><span>COSMOTECH <strong>SOLUTIONS</strong></span></a>
     <nav className={mobile?'navigation visible':'navigation'} aria-label="Navegação principal">
-      {[['Sobre','#sobre'],['Especialidades','#especialidades'],['Projetos','#projetos'],['Credenciais','#credenciais'],['Contato','#contato']].map(([label,url])=><a key={url} href={url} onClick={()=>setMobile(false)}>{label}</a>)}
+      {[['Sobre','#sobre'],['Especialidades','#especialidades'],['Projetos','#projetos'],['Cases','/cases/'],['Credenciais','#credenciais'],['Contato','#contato']].map(([label,url])=><a key={url} href={url} onClick={()=>setMobile(false)}>{label}</a>)}
     </nav>
     <a className="header-link" target="_blank" rel="noopener noreferrer" href={linkedin}>Conectar <ArrowUpRight size={16}/></a>
     <button className="menu" type="button" onClick={()=>setMobile(!mobile)} aria-label={mobile?'Fechar menu':'Abrir menu'} aria-expanded={mobile}>{mobile?<X/>:<Menu/>}</button>
