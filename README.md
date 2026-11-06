@@ -1,40 +1,41 @@
-# CosmoTech Solutions — Website
+# CosmoTech Solutions — Site oficial
 
-Site institucional e portfólio técnico independente de qualquer laboratório AWS.
+**URL canônica obrigatória:** https://www.cosmotechsolutions.com.br/
 
-## Executar localmente
+Repositório independente dos laboratórios AWS. Site estático React + TypeScript + Vite, publicado gratuitamente pelo Cloudflare Pages, sem backend, EKS, banco de dados ou recursos pagos.
 
-Requisitos: Node.js 20.19+ ou 22.12+.
+## Desenvolvimento local
+
+Node.js compatível com Vite 7 (20.19+ ou 22.12+):
 
 ```bash
 npm install
 npm run dev
-```
-
-## Build
-
-```bash
 npm run build
 ```
 
-Arquivos publicados: `dist/`.
+## Hospedagem gratuita — Cloudflare Pages
 
-## Publicar gratuitamente no Cloudflare Pages
+1. No dashboard Cloudflare, acesse **Workers & Pages** e crie um projeto **Pages** conectado ao GitHub.
+2. Escolha `rlcosmo/cosmotech-website`, branch de produção `main`.
+3. Framework preset: **Vite**; build command: `npm run build`; output directory: `dist`.
+4. Aguarde o primeiro deploy e valide a URL temporária `*.pages.dev`.
+5. Em **Pages → Custom domains → Set up a domain**, adicione **www.cosmotechsolutions.com.br**. Se o DNS estiver no mesmo Cloudflare, a configuração CNAME poderá ser criada automaticamente.
+6. Valide HTTPS no domínio com WWW. O endereço sem WWW (`cosmotechsolutions.com.br`) deve redirecionar permanentemente (301) para **https://www.cosmotechsolutions.com.br/**. Configure em **Rules → Redirect Rules** (padrão wildcard `https://cosmotechsolutions.com.br/*` → `https://www.cosmotechsolutions.com.br/${1}`, status 301, preservando query string). Garanta que o hostname raiz possua registro DNS proxied pela Cloudflare para que a regra seja aplicada. Se já existir um serviço no apex, revise antes de alterá-lo.
+7. Configure também redirecionamento de HTTP para HTTPS, se ainda não houver.
 
-1. Crie o repositório `rlcosmo/cosmotech-website` no GitHub e envie estes arquivos (não envie a pasta `node_modules`).
-2. Cloudflare Dashboard → Workers & Pages → Create → Pages → Connect to Git.
-3. Selecione o repositório e a branch `main`.
-4. Build command: `npm run build`; build output directory: `dist`.
-5. Depois do primeiro deploy, em Custom domains adicione `www.cosmotechsolutions.com.br` e `cosmotechsolutions.com.br` seguindo as instruções da Cloudflare. Não substitua registros DNS de outros serviços sem conferir.
+O arquivo `index.html` possui canonical e Open Graph com WWW; `public/sitemap.xml` e `public/robots.txt` também usam WWW.
 
-## Atualizar conteúdo
+**Importante:** conectar o GitHub pelo Cloudflare exige autorização no painel da sua conta; o código sozinho não altera DNS nem ativa a hospedagem.
 
-Edite `src/main.tsx` (projetos, experiências, links) e `src/style.css` (design). Cada push em `main` inicia novo deploy após conectar o GitHub ao Pages.
+## Atualizações
 
-## Segurança e custos
+- `src/main.tsx`: textos, projetos e links.
+- `src/style.css`: layout e responsividade.
+- `public/`: favicon, robots e sitemap.
 
-- Site estático: sem backend, sem banco, sem tokens, sem secrets e sem integração com laboratório AWS.
-- Cloudflare Pages Free e GitHub Free atendem à hospedagem inicial; domínio Registro.br continua sujeito à renovação.
-- Não adicionar dados privados, nomes de clientes em incidentes confidenciais, URLs internas ou credenciais.
-- A certificação AWS SAA é descrita com validade encerrada em 2025; atualizar apenas após confirmação de renovação.
-- Confirmar a redação pública de experiências e cases antes de divulgar o domínio.
+Cada push na `main` pode disparar novo deploy após ativação da integração Cloudflare Pages.
+
+## Segurança
+
+Não versionar senhas, arquivos .env, dados internos ou credenciais. Projetos do laboratório AWS são **documentação e portfólio**, sem integração ou disponibilidade operacional. Não expor incidentes confidenciais de clientes. Revisar datas de certificações antes da divulgação.
